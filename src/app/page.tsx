@@ -1,3 +1,3 @@
 export default function Home() {
-  return <h1>hello world</h1>;
+  return <main className="flex min-h-screen"></main>;
 }
