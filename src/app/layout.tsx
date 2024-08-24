@@ -1,7 +1,10 @@
 import "@/styles/index.css";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
-import { inter } from "@/fonts";
+import { poppins, sfPro } from "@/fonts";
+import { ThemeProvider } from "next-themes";
+import { twMerge } from "tailwind-merge";
+import { ThemeSwitch } from "./theme-switch";
 
 export const metadata: Metadata = {
   title: "Ítalo Braga",
@@ -14,8 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={inter.className}>{children}</body>
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className={twMerge(`${poppins.variable} ${sfPro.variable}`)}>
+        <ThemeProvider attribute="class" disableTransitionOnChange>
+          {children}
+
+          <ThemeSwitch />
+        </ThemeProvider>
+      </body>
 
       <Analytics />
     </html>
