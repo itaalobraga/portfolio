@@ -1,0 +1,161 @@
+{
+  "format": "page",
+  "id": "home",
+  "label": "Home",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "name": {
+        "type": "Text",
+        "config": {
+          "label": "name",
+          "placeholder": ""
+        }
+      },
+      "role": {
+        "type": "Text",
+        "config": {
+          "label": "role",
+          "placeholder": ""
+        }
+      },
+      "avatar": {
+        "type": "Image",
+        "config": {
+          "label": "avatar",
+          "constraint": {
+            "width": 100,
+            "height": 100
+          },
+          "thumbnails": []
+        }
+      },
+      "about": {
+        "type": "Text",
+        "config": {
+          "label": "about",
+          "placeholder": ""
+        }
+      },
+      "links": {
+        "type": "Group",
+        "config": {
+          "label": "links",
+          "repeat": true,
+          "fields": {
+            "label": {
+              "type": "Text",
+              "config": {
+                "label": "label",
+                "placeholder": ""
+              }
+            },
+            "link": {
+              "type": "Link",
+              "config": {
+                "label": "link",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "select": null
+              }
+            },
+            "title": {
+              "type": "Text",
+              "config": {
+                "label": "title",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      },
+      "exp": {
+        "type": "Group",
+        "config": {
+          "label": "exp",
+          "repeat": true,
+          "fields": {
+            "start_date": {
+              "type": "Date",
+              "config": {
+                "label": "start_date",
+                "placeholder": ""
+              }
+            },
+            "end_date": {
+              "type": "Date",
+              "config": {
+                "label": "end_date",
+                "placeholder": ""
+              }
+            },
+            "company_name": {
+              "type": "Text",
+              "config": {
+                "label": "company_name",
+                "placeholder": ""
+              }
+            },
+            "company_link": {
+              "type": "Link",
+              "config": {
+                "label": "company_link",
+                "placeholder": "",
+                "select": null
+              }
+            },
+            "resume": {
+              "type": "Text",
+              "config": {
+                "label": "resume",
+                "placeholder": ""
+              }
+            },
+            "tools": {
+              "type": "Text",
+              "config": {
+                "label": "tools",
+                "placeholder": ""
+              }
+            }
+          }
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {}
+        }
+      }
+    },
+    "SEO & Metadata": {
+      "meta_title": {
+        "config": {
+          "label": "Meta Title",
+          "placeholder": "A title of the page used for social media and search engines"
+        },
+        "type": "Text"
+      },
+      "meta_description": {
+        "config": {
+          "label": "Meta Description",
+          "placeholder": "A brief summary of the page"
+        },
+        "type": "Text"
+      },
+      "meta_image": {
+        "config": {
+          "constraint": {
+            "height": 1260,
+            "width": 2400
+          },
+          "label": "Meta Image",
+          "thumbnails": []
+        },
+        "type": "Image"
+      }
+    }
+  }
+}
