@@ -50,7 +50,7 @@ export default async function Home() {
           <div className="flex items-center gap-[1.5rem]">
             <PrismicNextImage
               field={avatar}
-              className="h-[6.25rem] w-[6.25rem] rounded-full object-contain transition-transform hover:scale-95"
+              className="h-[6.25rem] w-[6.25rem] rounded-full object-cover transition-transform hover:scale-95"
             />
 
             <div>
