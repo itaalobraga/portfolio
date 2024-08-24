@@ -44,7 +44,7 @@ export default async function Home() {
   const { avatar, name, role, about, links } = data;
 
   return (
-    <main className="bg flex min-h-screen flex-col justify-center">
+    <main className="bg flex min-h-screen flex-col justify-center p-[5%]">
       <div className="m-auto flex w-full max-w-[31.25rem] flex-col gap-[2.5rem]">
         <section>
           <div className="flex items-center gap-[1.5rem]">

@@ -21,7 +21,7 @@ export function ThemeSwitch() {
         <Button
           variant="outline"
           size="icon"
-          className="absolute right-[1.25rem] top-[1.25rem]"
+          className="absolute right-[5%] top-[5%]"
         >
           <Sun className="h-[1rem] w-[1rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Moon className="absolute h-[1rem] w-[1rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
