@@ -25,8 +25,8 @@
         "config": {
           "label": "avatar",
           "constraint": {
-            "width": "",
-            "height": ""
+            "width": null,
+            "height": null
           },
           "thumbnails": []
         }
@@ -70,30 +70,23 @@
           }
         }
       },
-      "exp": {
+      "experiences": {
         "type": "Group",
         "config": {
-          "label": "exp",
+          "label": "experiences",
           "repeat": true,
           "fields": {
-            "start_date": {
-              "type": "Date",
-              "config": {
-                "label": "start_date",
-                "placeholder": ""
-              }
-            },
-            "end_date": {
-              "type": "Date",
-              "config": {
-                "label": "end_date",
-                "placeholder": ""
-              }
-            },
             "company_name": {
               "type": "Text",
               "config": {
                 "label": "company_name",
+                "placeholder": ""
+              }
+            },
+            "company_role": {
+              "type": "Text",
+              "config": {
+                "label": "company_role",
                 "placeholder": ""
               }
             },
@@ -116,6 +109,20 @@
               "type": "Text",
               "config": {
                 "label": "tools",
+                "placeholder": ""
+              }
+            },
+            "start_date": {
+              "type": "Text",
+              "config": {
+                "label": "start_date",
+                "placeholder": ""
+              }
+            },
+            "end_date": {
+              "type": "Text",
+              "config": {
+                "label": "end_date",
                 "placeholder": ""
               }
             }

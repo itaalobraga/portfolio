@@ -40,68 +40,78 @@ export interface HomeDocumentDataLinksItem {
 }
 
 /**
- * Item in *Home → exp*
+ * Item in *Home → experiences*
  */
-export interface HomeDocumentDataExpItem {
+export interface HomeDocumentDataExperiencesItem {
   /**
-   * start_date field in *Home → exp*
-   *
-   * - **Field Type**: Date
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.exp[].start_date
-   * - **Documentation**: https://prismic.io/docs/field#date
-   */
-  start_date: prismic.DateField;
-
-  /**
-   * end_date field in *Home → exp*
-   *
-   * - **Field Type**: Date
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.exp[].end_date
-   * - **Documentation**: https://prismic.io/docs/field#date
-   */
-  end_date: prismic.DateField;
-
-  /**
-   * company_name field in *Home → exp*
+   * company_name field in *Home → experiences*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: home.exp[].company_name
+   * - **API ID Path**: home.experiences[].company_name
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   company_name: prismic.KeyTextField;
 
   /**
-   * company_link field in *Home → exp*
+   * company_role field in *Home → experiences*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.experiences[].company_role
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  company_role: prismic.KeyTextField;
+
+  /**
+   * company_link field in *Home → experiences*
    *
    * - **Field Type**: Link
    * - **Placeholder**: *None*
-   * - **API ID Path**: home.exp[].company_link
+   * - **API ID Path**: home.experiences[].company_link
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
   company_link: prismic.LinkField;
 
   /**
-   * resume field in *Home → exp*
+   * resume field in *Home → experiences*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: home.exp[].resume
+   * - **API ID Path**: home.experiences[].resume
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   resume: prismic.KeyTextField;
 
   /**
-   * tools field in *Home → exp*
+   * tools field in *Home → experiences*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: home.exp[].tools
+   * - **API ID Path**: home.experiences[].tools
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   tools: prismic.KeyTextField;
+
+  /**
+   * start_date field in *Home → experiences*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.experiences[].start_date
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  start_date: prismic.KeyTextField;
+
+  /**
+   * end_date field in *Home → experiences*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.experiences[].end_date
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  end_date: prismic.KeyTextField;
 }
 
 type HomeDocumentDataSlicesSlice = never;
@@ -166,15 +176,15 @@ interface HomeDocumentData {
   links: prismic.GroupField<Simplify<HomeDocumentDataLinksItem>>;
 
   /**
-   * exp field in *Home*
+   * experiences field in *Home*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: home.exp[]
+   * - **API ID Path**: home.experiences[]
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#group
    */
-  exp: prismic.GroupField<Simplify<HomeDocumentDataExpItem>>;
+  experiences: prismic.GroupField<Simplify<HomeDocumentDataExperiencesItem>>;
 
   /**
    * Slice Zone field in *Home*
@@ -276,7 +286,7 @@ declare module "@prismicio/client" {
       HomeDocument,
       HomeDocumentData,
       HomeDocumentDataLinksItem,
-      HomeDocumentDataExpItem,
+      HomeDocumentDataExperiencesItem,
       HomeDocumentDataSlicesSlice,
       AllDocumentTypes,
       ExampleSlice,
