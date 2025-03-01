@@ -1,10 +1,28 @@
-import { createClient } from "@/prismicio";
-import { asImageSrc } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
-import { PrismicLink } from "@prismicio/react";
-import { ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
+import {
+  Github,
+  Linkedin,
+  FileText,
+  ExternalLink,
+  Mail,
+  FolderGit2,
+} from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { createClient } from "@/prismicio";
+import { asImageSrc, asLink } from "@prismicio/client";
 import { notFound } from "next/navigation";
+import { PrismicNextImage } from "@prismicio/next";
+import { PrismicRichText } from "@prismicio/react";
+import Link from "next/link";
 
 export async function generateMetadata(): Promise<Metadata> {
   const client = createClient();
@@ -17,10 +35,12 @@ export async function generateMetadata(): Promise<Metadata> {
     title: meta_title,
     description: meta_description,
     creator: name,
-    authors: {
-      name: name ?? "Ítalo Braga",
-      url: "https://italobraga.com",
-    },
+    authors: [
+      {
+        name: name ?? "Ítalo Braga",
+        url: "https://italobraga.com",
+      },
+    ],
     openGraph: {
       type: "website",
       url: "https://italobraga.com",
@@ -29,7 +49,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: meta_title ?? "Ítalo Braga",
       images: [
         {
-          url: asImageSrc(meta_image) ?? "",
+          url: asImageSrc(meta_image) || "/default-image.png",
         },
       ],
     },
@@ -41,99 +61,240 @@ export default async function Home() {
 
   const { data } = await client.getSingle("home").catch(notFound);
 
-  const { avatar, name, role, about, links, experiences } = data;
+  const {
+    avatar,
+    name,
+    role,
+    technologies,
+    about,
+    github_url,
+    linked_in_url,
+    curriculum_url,
+    contact_url,
+    experiences,
+    projects,
+  } = data;
+
+  const hasProjects = !!projects?.length;
 
   return (
-    <main className="bg flex min-h-screen flex-col justify-center p-[5%]">
-      <div className="m-auto flex w-full max-w-[31.25rem] flex-col gap-[2.5rem]">
-        <section>
-          <div className="flex items-center gap-[1.5rem] max-md:flex-col">
-            <PrismicNextImage
-              field={avatar}
-              className="h-[6.25rem] w-[6.25rem] rounded-full object-cover transition-transform hover:scale-95"
+    <main className="container mx-auto max-w-4xl px-4 py-12">
+      <section className="mb-16 flex flex-col items-center gap-8 md:flex-row md:items-start">
+        <div className="relative h-40 w-40 flex-shrink-0 overflow-hidden rounded-full border-4 border-neutral-900/10 dark:border-neutral-50/10">
+          <PrismicNextImage
+            field={avatar}
+            className="object-cover"
+            priority
+            fill
+          />
+        </div>
+
+        <div className="space-y-4 text-center md:text-left">
+          <div>
+            <h2 className="text-4xl font-bold">{name}</h2>
+            <p className="text-xl text-neutral-500 dark:text-neutral-400">
+              {role}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-2 md:justify-start">
+            {technologies.map(({ name }, i) => (
+              <Badge key={i} variant="outline" className="px-3 py-1">
+                {name}
+              </Badge>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-3 md:justify-start">
+            <Button variant="outline" size="sm" asChild>
+              <Link
+                href={asLink(github_url) ?? ""}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="mr-2 h-4 w-4" />
+                GitHub
+              </Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link
+                href={asLink(linked_in_url) ?? ""}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Linkedin className="mr-2 h-4 w-4" />
+                LinkedIn
+              </Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link
+                href={asLink(curriculum_url) ?? ""}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FileText className="mr-2 h-4 w-4" />
+                Currículo
+              </Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link href={asLink(contact_url) ?? ""}>
+                <Mail className="mr-2 h-4 w-4" />
+                Contato
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <Tabs defaultValue="sobre" className="mb-16">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="sobre">Sobre</TabsTrigger>
+          <TabsTrigger value="experiencia">Experiência</TabsTrigger>
+          <TabsTrigger value="projetos">Projetos</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="sobre" className="mt-6 space-y-4">
+          <div className="prose dark:prose-invert max-w-none">
+            <PrismicRichText
+              field={about}
+              components={{
+                paragraph: ({ children }) => (
+                  <p className="text-lg">{children}</p>
+                ),
+              }}
             />
-
-            <div className="max-md:self-start">
-              <h1 className="h1 text-[1.5rem]">{name}</h1>
-
-              <h2 className="h2 text-[1rem]">{role}</h2>
-            </div>
           </div>
-        </section>
+        </TabsContent>
 
-        <section>
-          <h3 className="h3 mb-[1rem] text-[1rem]">Sobre</h3>
-
-          <p className="p text-[0.875rem]">{about}</p>
-        </section>
-
-        <section>
-          <h3 className="h3 mb-[1rem] text-[1rem]">Experiência</h3>
-
-          <div className="flex flex-col gap-[2rem]">
-            {experiences.map(
-              ({
-                company_link,
-                company_name,
-                company_role,
-                end_date,
-                resume,
+        <TabsContent value="experiencia" className="mt-6 space-y-8">
+          {experiences.map(
+            (
+              {
+                role,
+                company,
                 start_date,
-                tools,
-              }) => {
-                return (
-                  <div
-                    key={resume}
-                    className="flex items-start gap-[1.5rem] max-md:flex-col max-md:gap-[0.5rem]"
-                  >
-                    <span className="span shrink-0 text-[0.875rem]">
-                      {start_date} - {end_date}
-                    </span>
-
-                    <div className="flex flex-col gap-[0.5rem]">
-                      <PrismicLink
-                        field={company_link}
-                        rel="noopener noreferrer"
-                        className="link flex items-center gap-[0.5rem] text-[0.875rem] hover:underline"
-                        target="_blank"
-                      >
-                        {company_role} - {company_name}
-                        <ArrowUpRight className="link size-[0.875rem]" />
-                      </PrismicLink>
-
-                      <p className="p text-[0.875rem]">{resume}</p>
-
-                      <span className="span-2 text-[0.875rem]">{tools}</span>
-                    </div>
-                  </div>
-                );
+                end_date,
+                company_link,
+                resume,
+                technologies,
               },
-            )}
-          </div>
-        </section>
+              i,
+            ) => (
+              <Card key={i}>
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <CardTitle>
+                        {role} - {company}
+                      </CardTitle>
+                      <CardDescription>
+                        {start_date} - {end_date}
+                      </CardDescription>
+                    </div>
+                    <Button variant="ghost" size="icon" asChild>
+                      <Link
+                        href={asLink(company_link) ?? ""}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Visitar Orbesoft"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <PrismicRichText
+                    field={resume}
+                    components={{
+                      list: ({ children }) => (
+                        <ul className="list-disc space-y-2 pl-5">{children}</ul>
+                      ),
+                      listItem: ({ children }) => <li>{children}</li>,
+                    }}
+                  />
 
-        <section>
-          <h3 className="h3 mb-[1rem] text-[1rem]">Links</h3>
+                  <PrismicRichText
+                    field={technologies}
+                    components={{
+                      list: ({ children }) => (
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {children}
+                        </div>
+                      ),
+                      listItem: ({ children }) => (
+                        <Badge variant="secondary">{children}</Badge>
+                      ),
+                    }}
+                  />
+                </CardContent>
+              </Card>
+            ),
+          )}
+        </TabsContent>
 
-          {links.map(({ label, link, title }) => {
-            return (
-              <div key={label} className="flex items-center gap-[2.5rem]">
-                <span className="span text-[0.875rem]">{title}</span>
-
-                <PrismicLink
-                  field={link}
-                  rel="noopener noreferrer"
-                  className="link flex items-center gap-[0.5rem] text-[0.875rem] hover:underline"
-                  target="_blank"
-                >
-                  {label}
-                  <ArrowUpRight className="link size-[0.875rem]" />
-                </PrismicLink>
+        <TabsContent value="projetos" className="mt-6">
+          {!hasProjects && (
+            <div className="flex flex-col items-center justify-center space-y-4">
+              <div className="bg-primary/10 rounded-full p-8">
+                <FolderGit2 className="h-12 w-12" />
               </div>
-            );
-          })}
-        </section>
-      </div>
+              <div className="max-w-sm space-y-2 text-center">
+                <h3 className="text-xl font-semibold">
+                  Nenhum projeto encontrado
+                </h3>
+                <p className="text-muted-foreground">
+                  Os projetos que desenvolvi ainda não foram adicionados ao
+                  portfólio.
+                </p>
+              </div>
+              <Button variant="outline" asChild>
+                <Link
+                  href={asLink(github_url) + "?tab=repositories"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center"
+                >
+                  <Github className="mr-2 h-4 w-4" />
+                  Ver projetos no GitHub
+                </Link>
+              </Button>
+            </div>
+          )}
+
+          {hasProjects && (
+            <div className="grid gap-6 md:grid-cols-2">
+              {projects.map(
+                ({ title, sub_title, description, technologies }, i) => (
+                  <Card key={i}>
+                    <CardHeader>
+                      <CardTitle>{title}</CardTitle>
+                      <CardDescription>{sub_title}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="mb-4">{description}</p>
+
+                      <PrismicRichText
+                        field={technologies}
+                        components={{
+                          list: ({ children }) => (
+                            <div className="flex flex-wrap gap-2">
+                              {children}
+                            </div>
+                          ),
+                          listItem: ({ children }) => (
+                            <Badge variant="outline">{children}</Badge>
+                          ),
+                        }}
+                      />
+                    </CardContent>
+                  </Card>
+                ),
+              )}
+            </div>
+          )}
+        </TabsContent>
+      </Tabs>
     </main>
   );
 }
