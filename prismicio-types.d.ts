@@ -5,38 +5,18 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
- * Item in *Home → links*
+ * Item in *Home → technologies*
  */
-export interface HomeDocumentDataLinksItem {
+export interface HomeDocumentDataTechnologiesItem {
   /**
-   * label field in *Home → links*
+   * name field in *Home → technologies*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: home.links[].label
+   * - **API ID Path**: home.technologies[].name
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  label: prismic.KeyTextField;
-
-  /**
-   * link field in *Home → links*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.links[].link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  link: prismic.LinkField;
-
-  /**
-   * title field in *Home → links*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.links[].title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  title: prismic.KeyTextField;
+  name: prismic.KeyTextField;
 }
 
 /**
@@ -44,24 +24,24 @@ export interface HomeDocumentDataLinksItem {
  */
 export interface HomeDocumentDataExperiencesItem {
   /**
-   * company_name field in *Home → experiences*
+   * company field in *Home → experiences*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: home.experiences[].company_name
+   * - **API ID Path**: home.experiences[].company
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  company_name: prismic.KeyTextField;
+  company: prismic.KeyTextField;
 
   /**
-   * company_role field in *Home → experiences*
+   * role field in *Home → experiences*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: home.experiences[].company_role
+   * - **API ID Path**: home.experiences[].role
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
-  company_role: prismic.KeyTextField;
+  role: prismic.KeyTextField;
 
   /**
    * company_link field in *Home → experiences*
@@ -71,27 +51,13 @@ export interface HomeDocumentDataExperiencesItem {
    * - **API ID Path**: home.experiences[].company_link
    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
    */
-  company_link: prismic.LinkField;
-
-  /**
-   * resume field in *Home → experiences*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.experiences[].resume
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  resume: prismic.KeyTextField;
-
-  /**
-   * tools field in *Home → experiences*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.experiences[].tools
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  tools: prismic.KeyTextField;
+  company_link: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
 
   /**
    * start_date field in *Home → experiences*
@@ -112,6 +78,71 @@ export interface HomeDocumentDataExperiencesItem {
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   end_date: prismic.KeyTextField;
+
+  /**
+   * resume field in *Home → experiences*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.experiences[].resume
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  resume: prismic.RichTextField;
+
+  /**
+   * technologies field in *Home → experiences*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.experiences[].technologies
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  technologies: prismic.RichTextField;
+}
+
+/**
+ * Item in *Home → projects*
+ */
+export interface HomeDocumentDataProjectsItem {
+  /**
+   * title field in *Home → projects*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.projects[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * sub_title field in *Home → projects*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.projects[].sub_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  sub_title: prismic.KeyTextField;
+
+  /**
+   * description field in *Home → projects*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.projects[].description
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * technologies field in *Home → projects*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.projects[].technologies
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  technologies: prismic.RichTextField;
 }
 
 type HomeDocumentDataSlicesSlice = never;
@@ -120,6 +151,17 @@ type HomeDocumentDataSlicesSlice = never;
  * Content for Home documents
  */
 interface HomeDocumentData {
+  /**
+   * avatar field in *Home*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.avatar
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  avatar: prismic.ImageField<never>;
+
   /**
    * name field in *Home*
    *
@@ -143,37 +185,26 @@ interface HomeDocumentData {
   role: prismic.KeyTextField;
 
   /**
-   * avatar field in *Home*
+   * technologies field in *Home*
    *
-   * - **Field Type**: Image
+   * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: home.avatar
+   * - **API ID Path**: home.technologies[]
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#image
+   * - **Documentation**: https://prismic.io/docs/field#group
    */
-  avatar: prismic.ImageField<never>;
+  technologies: prismic.GroupField<Simplify<HomeDocumentDataTechnologiesItem>>;
 
   /**
    * about field in *Home*
    *
-   * - **Field Type**: Text
+   * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
    * - **API ID Path**: home.about
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#key-text
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  about: prismic.KeyTextField;
-
-  /**
-   * links field in *Home*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: home.links[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  links: prismic.GroupField<Simplify<HomeDocumentDataLinksItem>>;
+  about: prismic.RichTextField;
 
   /**
    * experiences field in *Home*
@@ -185,6 +216,85 @@ interface HomeDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   experiences: prismic.GroupField<Simplify<HomeDocumentDataExperiencesItem>>;
+
+  /**
+   * github_url field in *Home*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.github_url
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  github_url: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * linked_in_url field in *Home*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.linked_in_url
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  linked_in_url: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * curriculum_url field in *Home*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.curriculum_url
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  curriculum_url: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * contact_url field in *Home*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.contact_url
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  contact_url: prismic.LinkField<
+    string,
+    string,
+    unknown,
+    prismic.FieldState,
+    never
+  >;
+
+  /**
+   * projects field in *Home*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: home.projects[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  projects: prismic.GroupField<Simplify<HomeDocumentDataProjectsItem>>;
 
   /**
    * Slice Zone field in *Home*
@@ -281,12 +391,24 @@ declare module "@prismicio/client" {
     ): prismic.Client<AllDocumentTypes>;
   }
 
+  interface CreateWriteClient {
+    (
+      repositoryNameOrEndpoint: string,
+      options: prismic.WriteClientConfig,
+    ): prismic.WriteClient<AllDocumentTypes>;
+  }
+
+  interface CreateMigration {
+    (): prismic.Migration<AllDocumentTypes>;
+  }
+
   namespace Content {
     export type {
       HomeDocument,
       HomeDocumentData,
-      HomeDocumentDataLinksItem,
+      HomeDocumentDataTechnologiesItem,
       HomeDocumentDataExperiencesItem,
+      HomeDocumentDataProjectsItem,
       HomeDocumentDataSlicesSlice,
       AllDocumentTypes,
       ExampleSlice,
