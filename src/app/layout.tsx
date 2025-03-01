@@ -1,22 +1,32 @@
-import "@/styles/index.css";
-import { Analytics } from "@vercel/analytics/react";
-import { poppins, sfPro } from "@/fonts";
+import "@/styles/globals.css";
+import type React from "react";
 import { ThemeProvider } from "next-themes";
-import { twMerge } from "tailwind-merge";
-import { ThemeSwitch } from "./theme-switch";
+import { Analytics } from "@vercel/analytics/react";
+import { inter } from "@/fonts";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body className={twMerge(`${poppins.variable} ${sfPro.variable}`)}>
-        <ThemeProvider attribute="class" disableTransitionOnChange>
-          {children}
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="flex min-h-screen flex-col">
+            <Header />
 
-          <ThemeSwitch />
+            {children}
+
+            <Footer />
+          </div>
         </ThemeProvider>
       </body>
 

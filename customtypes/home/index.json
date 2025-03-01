@@ -6,6 +6,17 @@
   "status": true,
   "json": {
     "Main": {
+      "avatar": {
+        "type": "Image",
+        "config": {
+          "label": "avatar",
+          "constraint": {
+            "width": null,
+            "height": null
+          },
+          "thumbnails": []
+        }
+      },
       "name": {
         "type": "Text",
         "config": {
@@ -20,54 +31,29 @@
           "placeholder": ""
         }
       },
-      "avatar": {
-        "type": "Image",
-        "config": {
-          "label": "avatar",
-          "constraint": {
-            "width": null,
-            "height": null
-          },
-          "thumbnails": []
-        }
-      },
-      "about": {
-        "type": "Text",
-        "config": {
-          "label": "about",
-          "placeholder": ""
-        }
-      },
-      "links": {
+      "technologies": {
         "type": "Group",
         "config": {
-          "label": "links",
+          "label": "technologies",
           "repeat": true,
           "fields": {
-            "label": {
+            "name": {
               "type": "Text",
               "config": {
-                "label": "label",
-                "placeholder": ""
-              }
-            },
-            "link": {
-              "type": "Link",
-              "config": {
-                "label": "link",
-                "placeholder": "",
-                "allowTargetBlank": true,
-                "select": null
-              }
-            },
-            "title": {
-              "type": "Text",
-              "config": {
-                "label": "title",
+                "label": "name",
                 "placeholder": ""
               }
             }
           }
+        }
+      },
+      "about": {
+        "type": "StructuredText",
+        "config": {
+          "label": "about",
+          "placeholder": "",
+          "allowTargetBlank": true,
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
         }
       },
       "experiences": {
@@ -76,17 +62,17 @@
           "label": "experiences",
           "repeat": true,
           "fields": {
-            "company_name": {
+            "company": {
               "type": "Text",
               "config": {
-                "label": "company_name",
+                "label": "company",
                 "placeholder": ""
               }
             },
-            "company_role": {
+            "role": {
               "type": "Text",
               "config": {
-                "label": "company_role",
+                "label": "role",
                 "placeholder": ""
               }
             },
@@ -96,20 +82,6 @@
                 "label": "company_link",
                 "placeholder": "",
                 "select": null
-              }
-            },
-            "resume": {
-              "type": "Text",
-              "config": {
-                "label": "resume",
-                "placeholder": ""
-              }
-            },
-            "tools": {
-              "type": "Text",
-              "config": {
-                "label": "tools",
-                "placeholder": ""
               }
             },
             "start_date": {
@@ -124,6 +96,107 @@
               "config": {
                 "label": "end_date",
                 "placeholder": ""
+              }
+            },
+            "resume": {
+              "type": "StructuredText",
+              "config": {
+                "label": "resume",
+                "placeholder": "",
+                "allowTargetBlank": false,
+                "multi": "list-item"
+              }
+            },
+            "technologies": {
+              "type": "StructuredText",
+              "config": {
+                "label": "technologies",
+                "placeholder": "",
+                "allowTargetBlank": false,
+                "multi": "list-item"
+              }
+            }
+          }
+        }
+      },
+      "github_url": {
+        "type": "Link",
+        "config": {
+          "label": "github_url",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": false,
+          "repeat": false
+        }
+      },
+      "linked_in_url": {
+        "type": "Link",
+        "config": {
+          "label": "linked_in_url",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": false,
+          "repeat": false
+        }
+      },
+      "curriculum_url": {
+        "type": "Link",
+        "config": {
+          "label": "curriculum_url",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": false,
+          "repeat": false
+        }
+      },
+      "contact_url": {
+        "type": "Link",
+        "config": {
+          "label": "contact_url",
+          "placeholder": "",
+          "select": null,
+          "allowTargetBlank": true,
+          "allowText": false,
+          "repeat": false
+        }
+      },
+      "projects": {
+        "type": "Group",
+        "config": {
+          "label": "projects",
+          "repeat": true,
+          "fields": {
+            "title": {
+              "type": "Text",
+              "config": {
+                "label": "title",
+                "placeholder": ""
+              }
+            },
+            "sub_title": {
+              "type": "Text",
+              "config": {
+                "label": "sub_title",
+                "placeholder": ""
+              }
+            },
+            "description": {
+              "type": "Text",
+              "config": {
+                "label": "description",
+                "placeholder": ""
+              }
+            },
+            "technologies": {
+              "type": "StructuredText",
+              "config": {
+                "label": "technologies",
+                "placeholder": "",
+                "allowTargetBlank": true,
+                "multi": "list-item"
               }
             }
           }
